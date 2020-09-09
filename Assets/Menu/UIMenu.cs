@@ -10,15 +10,21 @@ public class UIMenu : MonoBehaviour
     [SerializeField] GameObject playButton;
     void Start()
     {
-        for (int i = 0; i < menuAnim.Length; i++)
-            if (menuAnim[i] != null)
-                menuAnim[i].transform.position = new Vector3(menuAnim[i].transform.position.x, buttonsPos[0].position.y, menuAnim[i].transform.position.z); 
+
     }
     void Update()
     {
         for (int i = 0; i < menuAnim.Length; i++)
+        {
             if (menuAnim[i] != null)
+            {
                 menuAnim[i].transform.Rotate(0, rotatePointer, 0);
+                if (EventSystem.current.currentSelectedGameObject != null)
+                {
+                    menuAnim[i].transform.position = new Vector3(menuAnim[i].transform.position.x, EventSystem.current.currentSelectedGameObject.transform.position.y, menuAnim[i].transform.position.z);
+                }
+            }
+        }
 
         if (EventSystem.current.currentSelectedGameObject != null)
             return;
