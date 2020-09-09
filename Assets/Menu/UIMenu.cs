@@ -1,21 +1,28 @@
-﻿using Boo.Lang;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class UIMenu : MonoBehaviour
 {
     [SerializeField] Transform[] buttonsPos;
-    [SerializeField] GameObject menuPointer;
+    [SerializeField] GameObject[] menuAnim;
     [SerializeField] float rotatePointer = 20;
+    [SerializeField] GameObject playButton;
     void Start()
     {
-        menuPointer.transform.position = new Vector3(menuPointer.transform.position.x, buttonsPos[0].position.y, menuPointer.transform.position.z);
+        for (int i = 0; i < menuAnim.Length; i++)
+            if (menuAnim[i] != null)
+                menuAnim[i].transform.position = new Vector3(menuAnim[i].transform.position.x, buttonsPos[0].position.y, menuAnim[i].transform.position.z); 
     }
     void Update()
     {
-        menuPointer.transform.Rotate(0, rotatePointer, 0);
+        for (int i = 0; i < menuAnim.Length; i++)
+            if (menuAnim[i] != null)
+                menuAnim[i].transform.Rotate(0, rotatePointer, 0);
+
+        if (EventSystem.current.currentSelectedGameObject != null)
+            return;
+        EventSystem.current.SetSelectedGameObject(playButton);
     }
     public void ChangeScene(string sceneName)
     {
