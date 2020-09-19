@@ -42,7 +42,7 @@ public class ContrCalibracion : MonoBehaviour
         palletsMover.enabled = false;
         Pj.ContrCalib = this;
 		
-		GM = GameObject.Find("GameMgr").GetComponent<GameManager>();
+		GM = GameManager.Instance;
 		
 		P.CintaReceptora = Llegada.gameObject;
 		Partida.Recibir(P);

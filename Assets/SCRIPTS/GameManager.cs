@@ -1,11 +1,16 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 	//public static Player[] Jugadoers;
-	
-	public static GameManager Instancia;
+
+	static GameManager instance;
+	public static GameManager Instance
+	{
+		get { if (instance == null) instance = new GameManager();return instance; }
+	}
 	
 	public float TiempoDeJuego = 60;
 	
@@ -70,11 +75,6 @@ public class GameManager : MonoBehaviour
 	
 	//--------------------------------------------------------//
 	
-	void Awake()
-	{
-		GameManager.Instancia = this;
-	}
-	
 	void Start()
 	{
 		IniciarCalibracion();
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 		if(Input.GetKey(KeyCode.Mouse1) &&
 		   Input.GetKey(KeyCode.Keypad0))
 		{
-			Application.LoadLevel(Application.loadedLevel);
+			SceneManager.LoadScene("Game");
 		}
 		
 		//CIERRA LA APLICACION
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
 			
 			TiempEspMuestraPts -= Time.deltaTime;
 			if(TiempEspMuestraPts <= 0)
-				Application.LoadLevel(Application.loadedLevel +1);				
+				SceneManager.LoadScene("End");				
 			
 			break;		
 		}
@@ -252,19 +252,19 @@ public class GameManager : MonoBehaviour
 	{
 		for(int i = 0; i < ObjsCalibracion1.Length; i++)
 		{
-			ObjsCalibracion1[i].SetActiveRecursively(true);
-			ObjsCalibracion2[i].SetActiveRecursively(true);
+			ObjsCalibracion1[i].gameObject.SetActive(true);
+			ObjsCalibracion2[i].gameObject.SetActive(true);
 		}
 		
 		for(int i = 0; i < ObjsTuto2.Length; i++)
 		{
-			ObjsTuto2[i].SetActiveRecursively(false);
-			ObjsTuto1[i].SetActiveRecursively(false);
+			ObjsTuto2[i].gameObject.SetActive(false);
+			ObjsTuto1[i].gameObject.SetActive(false);
 		}
 		
 		for(int i = 0; i < ObjsCarrera.Length; i++)
 		{
-			ObjsCarrera[i].SetActiveRecursively(false);
+			ObjsCarrera[i].gameObject.SetActive(false);
 		}
 		
 		

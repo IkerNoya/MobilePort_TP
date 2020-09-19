@@ -6,10 +6,10 @@ public class CarController : MonoBehaviour {
 
     public List<WheelCollider> throttleWheels = new List<WheelCollider>();
     public List<WheelCollider> steeringWheels = new List<WheelCollider>();
-    public float throttleCoefficient = 20000f;
+    public float throttleCoefficient;
     public float maxTurn = 20f;
     float giro = 0f;
-    float acel = 1f;
+    float acel = 10f;
 
 	void FixedUpdate () {
         foreach (var wheel in throttleWheels) {
