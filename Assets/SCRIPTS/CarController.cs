@@ -11,16 +11,9 @@ public class CarController : MonoBehaviour {
     float giro = 0f;
     float acel = 1f;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-
-	
-	// Update is called once per frame
 	void FixedUpdate () {
         foreach (var wheel in throttleWheels) {
-            wheel.motorTorque = throttleCoefficient * T.GetFDT() * acel;
+            wheel.motorTorque = throttleCoefficient * Time.deltaTime * acel;
         }
         foreach (var wheel in steeringWheels) {
             wheel.steerAngle = maxTurn * giro;

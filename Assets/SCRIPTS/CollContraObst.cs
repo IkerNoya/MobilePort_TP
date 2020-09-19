@@ -4,9 +4,9 @@ using System.Collections;
 public class CollContraObst : MonoBehaviour 
 {
 	public float TiempEsp = 1;
-	float Tempo1 = 0;
+	float timer_1 = 0;
 	public float TiempNoColl = 2;
-	float Tempo2 = 0;
+	float timer_2 = 0;
 	
 	enum Colisiones {ConTodo, EspDesact, SinObst}
 	Colisiones Colisiono = CollContraObst.Colisiones.ConTodo;
@@ -26,19 +26,19 @@ public class CollContraObst : MonoBehaviour
 			break;
 			
 		case Colisiones.EspDesact:
-			Tempo1 += T.GetDT();
-			if(Tempo1 >= TiempEsp)
+			timer_1 += Time.deltaTime;
+			if(timer_1 >= TiempEsp)
 			{
-				Tempo1 = 0;
+				timer_1 = 0;
 				IgnorarColls(true);
 			}
 			break;
 			
 		case Colisiones.SinObst:
-			Tempo2 += T.GetDT();
-			if(Tempo2 >= TiempNoColl)
+			timer_2 += Time.deltaTime;
+			if(timer_2 >= TiempNoColl)
 			{
-				Tempo2 = 0;
+				timer_2 = 0;
 				IgnorarColls(false);
 			}
 			break;

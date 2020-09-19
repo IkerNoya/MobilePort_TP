@@ -14,7 +14,7 @@ public class Frenado : MonoBehaviour
 	int Contador = 0;
 	int CantMensajes = 10;
 	float TiempFrenado = 0.5f;
-	float Tempo = 0f;
+	float timer = 0f;
 	
 	Vector3 Destino;
 	
@@ -40,13 +40,12 @@ public class Frenado : MonoBehaviour
 	{
 		if(Frenando)
 		{
-			Tempo += T.GetFDT();
-			if(Tempo >= (TiempFrenado / CantMensajes) * Contador)
+			timer += Time.deltaTime;
+			if(timer >= (TiempFrenado / CantMensajes) * Contador)
 			{
 				Contador++;
-				//gameObject.SendMessage("SetDragZ", (float) (DagMax / CantMensajes) * Contador);
 			}
-			if(Tempo >= TiempFrenado)
+			if(timer >= TiempFrenado)
 			{
 				//termino de frenar, que haga lo que quiera
 			}
@@ -75,26 +74,22 @@ public class Frenado : MonoBehaviour
 	
 	public void Frenar()
 	{
-		//Debug.Log(gameObject.name + "frena");
 		GetComponent<ControlDireccion>().enabled = false;
 		gameObject.SendMessage("SetAcel", 0f);
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
 		
 		Frenando = true;
 		
-		//gameObject.SendMessage("SetDragZ", 25f);
-		Tempo = 0;
+		timer = 0;
 		Contador = 0;
 	}
 	
 	public void RestaurarVel()
 	{
-		//Debug.Log(gameObject.name + "restaura la velociad");
 		GetComponent<ControlDireccion>().enabled = true;
 		gameObject.SendMessage("SetAcel", 1f);
 		Frenando = false;
-		Tempo = 0;
+		timer = 0;
 		Contador = 0;
-		//gameObject.SendMessage("SetDragZ", 1f);
 	}
 }
