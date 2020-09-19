@@ -20,18 +20,39 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         {
             stickPos = stickPos.normalized * joystickLimit;
         }
-        stick.anchoredPosition = stickPos;
+        if(stick!=null)
+            stick.anchoredPosition = stickPos;
+
+        float x = stickPos.x / joystickLimit;
+        float y = stickPos.y / joystickLimit;
+
+        InputManager.Instance.SetAxis("Horizontal", x);
+        InputManager.Instance.SetAxis("Vertical", y);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        background.color = Color.blue;
-        stick.anchoredPosition = ConvertToLocalPos(eventData);
+        if(stick!=null && background != null)
+        {
+            background.color = Color.blue;
+            stick.anchoredPosition = ConvertToLocalPos(eventData);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        background.color = Color.gray;
-        stick.anchoredPosition = Vector2.zero;
+        if (stick != null && background != null)
+        {
+            background.color = Color.gray;
+            stick.anchoredPosition = Vector2.zero;
+        }
+        InputManager.Instance.SetAxis("Horizontal", 0);
+        InputManager.Instance.SetAxis("Vertical", 0);
+    }
+
+    void OnDisable()
+    {
+        InputManager.Instance.SetAxis("Horizontal", 0);
+        InputManager.Instance.SetAxis("Vertical", 0);
     }
 }
