@@ -19,7 +19,7 @@ public class PalletMover : ManejoPallets {
                 if (!Tenencia() && Desde.Tenencia() && Input.GetKeyDown(KeyCode.A)) {
                     PrimerPaso();
                 }
-                if (Tenencia() && Input.GetKeyDown(KeyCode.S)) {
+                if (Tenencia() && Input.GetKeyDown(KeyCode.W)) {
                     SegundoPaso();
                 }
                 if (segundoCompleto && Tenencia() && Input.GetKeyDown(KeyCode.D)) {
@@ -30,7 +30,7 @@ public class PalletMover : ManejoPallets {
                 if (!Tenencia() && Desde.Tenencia() && Input.GetKeyDown(KeyCode.LeftArrow)) {
                     PrimerPaso();
                 }
-                if (Tenencia() && Input.GetKeyDown(KeyCode.DownArrow)) {
+                if (Tenencia() && Input.GetKeyDown(KeyCode.UpArrow)) {
                     SegundoPaso();
                 }
                 if (segundoCompleto && Tenencia() && Input.GetKeyDown(KeyCode.RightArrow)) {
