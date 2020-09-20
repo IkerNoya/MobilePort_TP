@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 public class UIMenu : MonoBehaviour
@@ -32,7 +33,7 @@ public class UIMenu : MonoBehaviour
     }
     public void ChangeScene(string sceneName)
     {
-        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
         Debug.Log("Loading " + sceneName);
     }
     public void Quit()

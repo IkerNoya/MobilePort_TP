@@ -33,7 +33,7 @@ public class CameraManager : MonoBehaviour
                 if (player2 != null)
                 {
                     transform.position = Vector3.Lerp(transform.position, player2.transform.position + offset, Time.deltaTime);
-                    transform.LookAt(player1.transform.position);
+                    transform.LookAt(player2.transform.position);
                 }
                 break;
         }

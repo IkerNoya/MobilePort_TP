@@ -6,6 +6,8 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
 {
     [SerializeField] RectTransform stick;
     [SerializeField] Image background;
+    [SerializeField] string playerInputX;
+    [SerializeField] string playerInputY;
     public float joystickLimit;
     Vector2 ConvertToLocalPos(PointerEventData eventData)
     {
@@ -26,8 +28,8 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
         float x = stickPos.x / joystickLimit;
         float y = stickPos.y / joystickLimit;
 
-        InputManager.Instance.SetAxis("Horizontal", x);
-        InputManager.Instance.SetAxis("Vertical", y);
+        InputManager.Instance.SetAxis(playerInputX, x);
+        InputManager.Instance.SetAxis(playerInputY, y);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -46,13 +48,13 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
             background.color = Color.gray;
             stick.anchoredPosition = Vector2.zero;
         }
-        InputManager.Instance.SetAxis("Horizontal", 0);
-        InputManager.Instance.SetAxis("Vertical", 0);
+        InputManager.Instance.SetAxis(playerInputX, 0);
+        InputManager.Instance.SetAxis(playerInputY, 0);
     }
 
     void OnDisable()
     {
-        InputManager.Instance.SetAxis("Horizontal", 0);
-        InputManager.Instance.SetAxis("Vertical", 0);
+        InputManager.Instance.SetAxis(playerInputX, 0);
+        InputManager.Instance.SetAxis(playerInputY, 0);
     }
 }

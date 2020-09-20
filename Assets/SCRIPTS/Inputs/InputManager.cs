@@ -11,7 +11,7 @@ public class InputManager
     }
     Dictionary<string, float> axisValues = new Dictionary<string, float>()
     {
-        {"Horizontal", 0f},{"Vertical", 0f}
+        {"Horizontal_1", 0f},{"Vertical_1", 0f}, {"Horizontal_2", 0f}, {"Vertical_2", 0f}
     };
     public void SetAxis(string axis, float value)
     {
