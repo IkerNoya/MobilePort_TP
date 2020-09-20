@@ -143,8 +143,9 @@ public class GameManager : MonoBehaviour
 			
 			
 		case EstadoJuego.Jugando:
-			
-			//SKIP LA CARRERA
+
+				//SKIP LA CARRERA
+				CambiarACarrera();
 			if(Input.GetKey(KeyCode.Mouse1) && 
 			   Input.GetKey(KeyCode.Keypad0))
 			{
@@ -252,18 +253,23 @@ public class GameManager : MonoBehaviour
 	{
 		for(int i = 0; i < ObjsCalibracion1.Length; i++)
 		{
-			ObjsCalibracion1[i].gameObject.SetActive(true);
-			ObjsCalibracion2[i].gameObject.SetActive(true);
+			if (ObjsCalibracion1[i] != null && ObjsCalibracion2 != null)
+			{
+				ObjsCalibracion1[i].gameObject.SetActive(true);
+				ObjsCalibracion2[i].gameObject.SetActive(true);
+			}
 		}
 		
 		for(int i = 0; i < ObjsTuto2.Length; i++)
 		{
+			if(ObjsCalibracion1[i]!=null && ObjsCalibracion2[i] != null)
 			ObjsTuto2[i].gameObject.SetActive(false);
 			ObjsTuto1[i].gameObject.SetActive(false);
 		}
 		
 		for(int i = 0; i < ObjsCarrera.Length; i++)
 		{
+			if(ObjsCarrera[i]!=null)
 			ObjsCarrera[i].gameObject.SetActive(false);
 		}
 		
@@ -291,12 +297,12 @@ public class GameManager : MonoBehaviour
 			
 		for(int i = 0; i < ObjsTuto1.Length; i++)
 		{
-			ObjsTuto1[i].SetActiveRecursively(true);
+			ObjsTuto1[i].gameObject.SetActive(true);
 		}
 		
 		for(int i = 0; i < ObjsCalibracion1.Length; i++)
 		{
-			ObjsCalibracion1[i].SetActiveRecursively(false);
+			ObjsCalibracion1[i].gameObject.SetActive(false);
 		}
 		Player1.GetComponent<Frenado>().Frenar();
 		Player1.CambiarATutorial();
@@ -308,12 +314,12 @@ public class GameManager : MonoBehaviour
 			
 		for(int i = 0; i < ObjsCalibracion2.Length; i++)
 		{
-			ObjsCalibracion2[i].SetActiveRecursively(false);
+			ObjsCalibracion2[i].gameObject.SetActive(false);
 		}
 		
 		for(int i = 0; i < ObjsTuto2.Length; i++)
 		{
-			ObjsTuto2[i].SetActiveRecursively(true);
+			ObjsTuto2[i].gameObject.SetActive(true);
 		}
 		Player2.GetComponent<Frenado>().Frenar();
 		Player2.gameObject.transform.position = PosCamion2Tuto;
@@ -419,7 +425,7 @@ public class GameManager : MonoBehaviour
 		
 		for(int i = 0; i < ObjsCarrera.Length; i++)
 		{
-			ObjsCarrera[i].SetActiveRecursively(true);
+			ObjsCarrera[i].gameObject.SetActive(true);
 		}
 		
 		/*
@@ -436,24 +442,28 @@ public class GameManager : MonoBehaviour
 			
 		for(int i = 0; i < ObjsTuto1.Length; i++)
 		{
-			ObjsTuto1[i].SetActiveRecursively(true);
+			if(ObjsTuto1[i]!=null)
+				ObjsTuto1[i].gameObject.SetActive(true);
 		}
 		
 		for(int i = 0; i < ObjsCalibracion1.Length; i++)
 		{
-			ObjsCalibracion1[i].SetActiveRecursively(false);
+			if (ObjsCalibracion1[i] != null)
+				ObjsCalibracion1[i].gameObject.SetActive(false);
 		}
 		
 		PlayerInfo2.FinCalibrado = true;
 			
 		for(int i = 0; i < ObjsCalibracion2.Length; i++)
 		{
-			ObjsCalibracion2[i].SetActiveRecursively(false);
+			if (ObjsCalibracion2[i] != null)
+				ObjsCalibracion2[i].gameObject.SetActive(false);
 		}
 		
 		for(int i = 0; i < ObjsTuto2.Length; i++)
 		{
-			ObjsTuto2[i].SetActiveRecursively(true);
+			if (ObjsTuto2[i] != null)
+				ObjsTuto2[i].gameObject.SetActive(true);
 		}
 		
 		

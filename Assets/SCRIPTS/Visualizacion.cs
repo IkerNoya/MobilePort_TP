@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// clase encargada de TODA la visualizacion
@@ -155,7 +156,8 @@ public class Visualizacion : MonoBehaviour
 	
 	public void CambiarACalibracion()
 	{
-		CamCalibracion.enabled = true;
+		if(CamCalibracion!=null)
+			CamCalibracion.enabled = true;
 		CamConduccion.enabled = false;
 		CamDescarga.enabled = false;
 	}
@@ -169,14 +171,16 @@ public class Visualizacion : MonoBehaviour
 	
 	public void CambiarAConduccion()
 	{
-		CamCalibracion.enabled = false;
+		if(CamCalibracion!=null)
+			CamCalibracion.enabled = false;
 		CamConduccion.enabled = true;
 		CamDescarga.enabled = false;
 	}
 	
 	public void CambiarADescarga()
 	{
-		CamCalibracion.enabled = false;
+		if(CamCalibracion!=null)
+			CamCalibracion.enabled = false;
 		CamConduccion.enabled = false;
 		CamDescarga.enabled = true;
 	}
@@ -203,8 +207,8 @@ public class Visualizacion : MonoBehaviour
 			r.x = 0;
 			break;
 		}
-		
-		CamCalibracion.rect = r;
+		if(CamCalibracion!=null)
+			CamCalibracion.rect = r;
 		CamConduccion.rect = r;
 		CamDescarga.rect = r;
 		
