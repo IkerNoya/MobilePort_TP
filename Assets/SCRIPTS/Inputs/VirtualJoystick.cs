@@ -8,6 +8,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     [SerializeField] Image background;
     [SerializeField] string playerInputX;
     [SerializeField] string playerInputY;
+    [SerializeField] Color color;
     public float joystickLimit;
     Vector2 ConvertToLocalPos(PointerEventData eventData)
     {
@@ -36,7 +37,7 @@ public class VirtualJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, I
     {
         if(stick!=null && background != null)
         {
-            background.color = Color.blue;
+            background.color = color;
             stick.anchoredPosition = ConvertToLocalPos(eventData);
         }
     }
