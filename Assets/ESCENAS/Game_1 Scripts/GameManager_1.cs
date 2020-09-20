@@ -9,6 +9,12 @@ public class GameManager_1 : MonoBehaviour
     {
         get { if (instance == null) instance = new GameManager_1(); return instance; }
     }
+    public enum GameState
+    {
+        Game, 
+        Unload
+    }
+    public GameState state;
     void Start()
     {
         

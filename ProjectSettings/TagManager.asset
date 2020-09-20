@@ -11,6 +11,8 @@ TagManager:
   - Estante
   - FinTaxi
   - Obstaculo
+  - Player1_Cam
+  - Player2_Cam
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - Camion2
   - Obstaculo
   - Taxis
-  - 
-  - 
+  - PlayerCam_1
+  - PlayerCam_2
   - 
   - 
   - 
