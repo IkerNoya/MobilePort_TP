@@ -43,7 +43,7 @@ public class Respawn : MonoBehaviour
 				Contador = 0;
 				if(AngMax < Quaternion.Angle(transform.rotation, CPAct.transform.rotation))
 				{
-					Respawnear();
+					Respawnear(CPAct.transform.position);
 				}
 			}
 		}
@@ -60,41 +60,11 @@ public class Respawn : MonoBehaviour
 	}
 	
 	//--------------------------------------------------------//
-	
-	public void Respawnear()
-	{
-		GetComponent<Rigidbody>().velocity = Vector3.zero;
-		
-		gameObject.SendMessage("SetGiro", 0f);
-		
-		if(CPAct.Habilitado())
-		{
-			if(GetComponent<Visualizacion>().LadoAct == Visualizacion.Lado.Der)
-				transform.position = CPAct.transform.position + CPAct.transform.right * Random.Range(RangMinDer, RangMaxDer);
-			else 
-				transform.position = CPAct.transform.position + CPAct.transform.right * Random.Range(RangMinDer * (-1), RangMaxDer * (-1));
-			transform.forward = CPAct.transform.forward;
-		}
-		else if(CPAnt != null)
-		{
-			if(GetComponent<Visualizacion>().LadoAct == Visualizacion.Lado.Der)
-				transform.position = CPAnt.transform.position + CPAnt.transform.right * Random.Range(RangMinDer, RangMaxDer);
-			else
-				transform.position = CPAnt.transform.position + CPAnt.transform.right * Random.Range(RangMinDer * (-1), RangMaxDer * (-1));
-			transform.forward = CPAnt.transform.forward;
-		}
-		
-		IgnorarColision(true);
-		
-		//animacion de resp
-		
-	}
+
 	
 	public void Respawnear(Vector3 pos)
 	{
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
-		
-		gameObject.SendMessage("SetGiro", 0f);
 		
 		transform.position = pos;
 		
@@ -104,8 +74,6 @@ public class Respawn : MonoBehaviour
 	public void Respawnear(Vector3 pos, Vector3 dir)
 	{
 		GetComponent<Rigidbody>().velocity = Vector3.zero;
-		
-		gameObject.SendMessage("SetGiro", 0f);
 		
 		transform.position = pos;
 		transform.forward = dir;

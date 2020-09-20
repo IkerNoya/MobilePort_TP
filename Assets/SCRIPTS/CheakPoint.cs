@@ -30,7 +30,7 @@ public class CheakPoint : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag == PlayerTag)
+		if(other.gameObject.CompareTag("Player"))
 		{
 			other.GetComponent<Respawn>().AgregarCP(this);
 		}	

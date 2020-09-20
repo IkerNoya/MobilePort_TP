@@ -9,14 +9,8 @@ public class TruckController : MonoBehaviour
     [SerializeField] float strenghCoefficient;
     [SerializeField] float brakeStrengh;
     [SerializeField] float maxTurn;
-    [SerializeField] Transform centerMass;
     [SerializeField] Rigidbody rb;
     bool startBrake = false;
-    void Start()
-    {
-        if(centerMass!=null)
-            rb.centerOfMass = centerMass.position;
-    }
 
     void Update()
     {
@@ -35,7 +29,7 @@ public class TruckController : MonoBehaviour
         {
             if (!startBrake)
             {
-                wheel.motorTorque = strenghCoefficient * Time.deltaTime * InputManager.Instance.GetAxis("Vertical");
+                wheel.motorTorque = strenghCoefficient * Time.fixedDeltaTime * InputManager.Instance.GetAxis("Vertical");
                 wheel.brakeTorque = 0f;
             }
             else
