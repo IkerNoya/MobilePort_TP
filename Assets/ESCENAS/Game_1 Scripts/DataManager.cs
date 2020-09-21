@@ -15,6 +15,7 @@ public class DataManager : MonoBehaviour
     {
         EndGame.AddScore1 += addScore1;
         EndGame.AddScore2 += addScore2;
+        UIMenu.resetPoints += ResetScore;
     }
     void Awake()
     {
@@ -44,7 +45,7 @@ public class DataManager : MonoBehaviour
     {
         player2Score++;
     }
-    void ResetScore()
+    void ResetScore(UIMenu reset)
     {
         player1Score = 0;
         player2Score = 0;
@@ -53,5 +54,6 @@ public class DataManager : MonoBehaviour
     {
         EndGame.AddScore1 -= addScore1;
         EndGame.AddScore2 -= addScore2;
+        UIMenu.resetPoints -= ResetScore;
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -8,11 +9,9 @@ public class UIMenu : MonoBehaviour
     [SerializeField] Transform[] buttonsPos;
     [SerializeField] GameObject[] menuAnim;
     [SerializeField] float rotatePointer = 20;
-    [SerializeField] GameObject playButton;
-    void Start()
-    {
-
-    }
+    [SerializeField] GameObject playButton; 
+    public static event Action<UIMenu> resetPoints;
+ 
     void Update()
     {
         for (int i = 0; i < menuAnim.Length; i++)
@@ -35,6 +34,10 @@ public class UIMenu : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         Debug.Log("Loading " + sceneName);
+        if (sceneName == "Game_1")
+        {
+            resetPoints(this);
+        }
     }
     public void Quit()
     {
