@@ -13,7 +13,7 @@ public class Visualizacion : MonoBehaviour
 	public Lado LadoAct;
 	
 	ControlDireccion Direccion;
-	Player Pj;
+	PlayerScript Pj;
 	
 	//las distintas camaras
 	public Camera CamCalibracion;
@@ -101,7 +101,7 @@ public class Visualizacion : MonoBehaviour
 	{
 		TempoIntTuto = Intervalo;
 		Direccion = GetComponent<ControlDireccion>();
-		Pj = GetComponent<Player>();
+		Pj = GetComponent<PlayerScript>();
 	}
 	
 	// Update is called once per frame
@@ -112,40 +112,28 @@ public class Visualizacion : MonoBehaviour
 	
 	void OnGUI()
 	{	
-		switch(Pj.EstAct)
+		switch(Pj.state)
 		{
 			
 			
-		case Player.Estados.EnConduccion:
+		case PlayerScript.State.Driving:
 			//inventario
 			SetInv3();
 			//contador de dinero
 			SetDinero();
-			//el volante
-			SetVolante();
+				//el volante
+				//SetVolante();
 			break;
 			
 			
 			
-		case Player.Estados.EnDescarga:
+		case PlayerScript.State.Delivering:
 			//inventario
 			SetInv3();
 			//el bonus
 			SetBonus();
 			//contador de dinero
 			SetDinero();			
-			break;
-			
-			
-		case Player.Estados.EnCalibracion:
-			//SetCalibr();
-			break;
-			
-			
-		case Player.Estados.EnTutorial:
-			SetInv3();
-			SetTuto();
-			SetVolante();
 			break;
 		}
 		
@@ -224,7 +212,7 @@ public class Visualizacion : MonoBehaviour
 	
 	void SetBonus()
 	{
-		if(Pj.ContrDesc.PEnMov != null)
+		if(Pj.cd.PEnMov != null)
 		{
 			//el fondo
 			GUI.skin = GS_FondoFondoBonusColor;
@@ -242,7 +230,7 @@ public class Visualizacion : MonoBehaviour
 			GUI.skin = GS_FondoBonusColor;
 			
 			R.width = ColorFondoEsc.x *Screen.width /100;
-			R.height = (ColorFondoEsc.y *Screen.height /100) * (Pj.ContrDesc.Bonus / (int)Pallet.Valores.Valor2);
+			R.height = (ColorFondoEsc.y *Screen.height /100) * (Pj.cd.Bonus / (int)Pallet.Valores.Valor2);
 			R.x = ColorFondoPos.x *Screen.width /100;
 			R.y = (ColorFondoPos.y *Screen.height /100) - R.height;
 			if(LadoAct == Visualizacion.Lado.Der)
@@ -259,7 +247,7 @@ public class Visualizacion : MonoBehaviour
 			R.y = BonusPos.y *Screen.height /100;
 			if(LadoAct == Visualizacion.Lado.Der)
 				R.x += (Screen.width)/2;
-			GUI.Box(R, "     $" + Pj.ContrDesc.Bonus.ToString("0"));
+			GUI.Box(R, "     $" + Pj.cd.Bonus.ToString("0"));
 		}
 	}
 	
@@ -274,73 +262,73 @@ public class Visualizacion : MonoBehaviour
 		if(LadoAct == Visualizacion.Lado.Der)
 			R.x = DinPos[1].x *Screen.width /100;
 			//R.x = (Screen.width) - (Screen.width/2) - R.x;
-		GUI.Box(R, "$" + PrepararNumeros(Pj.Dinero));
+		GUI.Box(R, "$" + PrepararNumeros(Pj.money));
 	}
 	
-	void SetCalibr()
-	{
-		GUI.skin = GS_TutoCalib;
+	//void SetCalibr()
+	//{
+	//	GUI.skin = GS_TutoCalib;
 		
-		R.width = ReadyEsc.x *Screen.width /100;
-		R.height = ReadyEsc.y *Screen.height /100;
-		R.x = ReadyPos.x *Screen.width /100;
-		R.y = ReadyPos.y *Screen.height /100;
-		if(LadoAct == Visualizacion.Lado.Der)
-			R.x = (Screen.width) - R.x - R.width;
+	//	R.width = ReadyEsc.x *Screen.width /100;
+	//	R.height = ReadyEsc.y *Screen.height /100;
+	//	R.x = ReadyPos.x *Screen.width /100;
+	//	R.y = ReadyPos.y *Screen.height /100;
+	//	if(LadoAct == Visualizacion.Lado.Der)
+	//		R.x = (Screen.width) - R.x - R.width;
 		
-		switch(Pj.ContrCalib.EstAct)
-		{
-		case ContrCalibracion.Estados.Calibrando:
+	//	switch(Pj.ContrCalib.EstAct)
+	//	{
+	//	case ContrCalibracion.Estados.Calibrando:
 			
-			//pongase en posicion para iniciar
-			GS_TutoCalib.box.normal.background = ImaEnPosicion;			
-			GUI.Box(R,"");
+	//		//pongase en posicion para iniciar
+	//		GS_TutoCalib.box.normal.background = ImaEnPosicion;			
+	//		GUI.Box(R,"");
 			
-			break;
+	//		break;
 			
-		case ContrCalibracion.Estados.Tutorial:
-			//tome la bolsa y depositela en el estante
+	//	case ContrCalibracion.Estados.Tutorial:
+	//		//tome la bolsa y depositela en el estante
 			
-			TempoIntTuto += Time.deltaTime;
-			if(TempoIntTuto >= Intervalo)
-			{
-				TempoIntTuto = 0;
-				if(EnCurso + 1 < ImagenesDelTuto.Length)
-					EnCurso++;
-				else
-					EnCurso = 0;
-			}
-			GS_TutoCalib.box.normal.background = ImagenesDelTuto[EnCurso];
+	//		TempoIntTuto += Time.deltaTime;
+	//		if(TempoIntTuto >= Intervalo)
+	//		{
+	//			TempoIntTuto = 0;
+	//			if(EnCurso + 1 < ImagenesDelTuto.Length)
+	//				EnCurso++;
+	//			else
+	//				EnCurso = 0;
+	//		}
+	//		GS_TutoCalib.box.normal.background = ImagenesDelTuto[EnCurso];
 			
-			GUI.Box(R,"");
+	//		GUI.Box(R,"");
 			
-			break;
+	//		break;
 			
-		case ContrCalibracion.Estados.Finalizado:
-			//esperando al otro jugador		
-			GS_TutoCalib.box.normal.background = ImaReady;
-			GUI.Box(R,"");
+	//	case ContrCalibracion.Estados.Finalizado:
+	//		//esperando al otro jugador		
+	//		GS_TutoCalib.box.normal.background = ImaReady;
+	//		GUI.Box(R,"");
 			
-			break;
-		}
-	}
+	//		break;
+	//	}
+	//}
 	
-	void SetTuto()
-	{
-		if(Pj.ContrTuto.Finalizado)
-		{
-			GUI.skin = GS_TutoCalib;
+	//void SetTuto()
+	//{
+	//	if(Pj.ContrTuto.Finalizado)
+	//	{
+	//		GUI.skin = GS_TutoCalib;
 			
-			R.width = ReadyEsc.x *Screen.width /100;
-			R.height = ReadyEsc.y *Screen.height /100;
-			R.x = ReadyPos.x *Screen.width /100;
-			R.y = ReadyPos.y *Screen.height /100;
-			if(LadoAct == Visualizacion.Lado.Der)
-				R.x = (Screen.width) - R.x - R.width;
+	//		R.width = ReadyEsc.x *Screen.width /100;
+	//		R.height = ReadyEsc.y *Screen.height /100;
+	//		R.x = ReadyPos.x *Screen.width /100;
+	//		R.y = ReadyPos.y *Screen.height /100;
+	//		if(LadoAct == Visualizacion.Lado.Der)
+	//			R.x = (Screen.width) - R.x - R.width;
 			
-			GUI.Box(R,"ESPERANDO AL OTRO JUGADOR");
-		}
-	}
+	//		GUI.Box(R,"ESPERANDO AL OTRO JUGADOR");
+	//	}
+	//}
 	
 	/*
 	void SetInv()
@@ -389,32 +377,32 @@ public class Visualizacion : MonoBehaviour
 	}
 	*/
 	
-	void SetVolante()
-	{
-		GUI.skin = GS_Volante;
+	//void SetVolante()
+	//{
+	//	GUI.skin = GS_Volante;
 		
-		R.width = VolanteEsc * Screen.width /100;
-		R.height = VolanteEsc * Screen.width /100;
-		R.x = VolantePos[0].x *Screen.width /100;
-		R.y = VolantePos[0].y *Screen.height /100;
+	//	R.width = VolanteEsc * Screen.width /100;
+	//	R.height = VolanteEsc * Screen.width /100;
+	//	R.x = VolantePos[0].x *Screen.width /100;
+	//	R.y = VolantePos[0].y *Screen.height /100;
 		
-		if(LadoAct == Visualizacion.Lado.Der)
-			R.x = VolantePos[1].x *Screen.width /100;
-			//R.x = (Screen.width) - ((Screen.width/2) - R.x);
+	//	if(LadoAct == Visualizacion.Lado.Der)
+	//		R.x = VolantePos[1].x *Screen.width /100;
+	//		//R.x = (Screen.width) - ((Screen.width/2) - R.x);
 		
-		Vector2 centro;
-		centro.x = R.x + R.width/2;
-		centro.y = R.y + R.height/2;
-		float angulo = 100 * Direccion.GetGiro();
+	//	Vector2 centro;
+	//	centro.x = R.x + R.width/2;
+	//	centro.y = R.y + R.height/2;
+	//	float angulo = 100 * Direccion.GetGiro();
 		
-		GUIUtility.RotateAroundPivot(angulo, centro);
+	//	GUIUtility.RotateAroundPivot(angulo, centro);
 				
-		GUI.Box(R,"");
+	//	GUI.Box(R,"");
 		
-		GUIUtility.RotateAroundPivot(angulo*(-1), centro);
-	}
+	//	GUIUtility.RotateAroundPivot(angulo*(-1), centro);
+	//}
 	
-	void SetInv2()
+	void SetInv2() // inventario
 	{
 		GUI.skin = GS_Inv;
 		
@@ -426,7 +414,7 @@ public class Visualizacion : MonoBehaviour
 		int contador = 0;
 		for(int i = 0; i < 3; i++)
 		{
-			if(Pj.Bolasas[i]!=null)
+			if(Pj.Bags[i]!=null)
 				contador++;
 		}
 		
@@ -456,7 +444,7 @@ public class Visualizacion : MonoBehaviour
 		int contador = 0;
 		for(int i = 0; i < 3; i++)
 		{
-			if(Pj.Bolasas[i]!=null)
+			if(Pj.Bags[i]!=null)
 				contador++;
 		}
 		

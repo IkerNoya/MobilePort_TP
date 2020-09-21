@@ -12,11 +12,19 @@ public class TruckController : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] string axisX;
     [SerializeField] string axisY;
+    PlayerScript player;
     
     bool startBrake = false;
+    private void Start()
+    {
+        player = GetComponent<PlayerScript>();
+    }
 
     void Update()
     {
+        if (player.state == PlayerScript.State.Delivering)
+            return;
+
         if (InputManager.Instance.GetAxis(axisY) <= 0)
         {
             startBrake = true;
@@ -30,7 +38,7 @@ public class TruckController : MonoBehaviour
     {
         foreach(WheelCollider wheel in throttleWheels)
         {
-            if (!startBrake)
+            if (!startBrake && player.state == PlayerScript.State.Driving)
             {
                 wheel.motorTorque = strenghCoefficient * Time.fixedDeltaTime * InputManager.Instance.GetAxis(axisY);
                 wheel.brakeTorque = 0f;

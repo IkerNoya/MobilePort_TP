@@ -9,9 +9,9 @@ public class ControladorDeDescarga : MonoBehaviour
 	
 	Deposito2 Dep;
 	
-	public GameObject[] Componentes;//todos los componentes que debe activar en esta escena
+	public GameObject EscenaDescarga;//todos los componentes que debe activar en esta escena
 	
-	public Player Pj;//jugador
+	public PlayerScript Pj;//jugador
 	MeshCollider CollCamion;
 	
 	public Pallet PEnMov = null;
@@ -44,13 +44,11 @@ public class ControladorDeDescarga : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		for (int i = 0; i < Componentes.Length; i++)
-		{
-			Componentes[i].SetActiveRecursively(false);
-		}
+
+		EscenaDescarga.gameObject.SetActive(false);
+	
 		
 		CollCamion = Pj.GetComponentInChildren<MeshCollider>();
-		Pj.SetContrDesc(this);
 		if(ObjAnimado != null)
 			ObjAnimado.ContrDesc = this;
 	}
@@ -80,13 +78,11 @@ public class ControladorDeDescarga : MonoBehaviour
 	public void Activar(Deposito2 d)
 	{
 		Dep = d;//recibe el deposito para que sepa cuando dejarlo ir al camion
-		CamaraConduccion.SetActiveRecursively(false);//apaga la camara de conduccion
+		CamaraConduccion.gameObject.SetActive(false);//apaga la camara de conduccion
 			
 		//activa los componentes
-		for (int i = 0; i < Componentes.Length; i++)
-		{
-			Componentes[i].SetActiveRecursively(true);
-		}
+		EscenaDescarga.gameObject.SetActive(true);
+
 		
 			
 		CollCamion.enabled = false;
@@ -95,13 +91,13 @@ public class ControladorDeDescarga : MonoBehaviour
 		
 		GameObject go;
 		//asigna los pallets a las estanterias
-		for(int i = 0; i < Pj.Bolasas.Length; i++)
+		for(int i = 0; i < Pj.Bags.Length; i++)
 		{
-			if(Pj.Bolasas[i] != null)
+			if(Pj.Bags[i] != null)
 			{
 				Contador++;
 				
-				switch(Pj.Bolasas[i].Monto)
+				switch(Pj.Bags[i].Monto)
 				{
 				case Pallet.Valores.Valor1:
 					go = (GameObject) Instantiate(Pallet1);
@@ -130,7 +126,7 @@ public class ControladorDeDescarga : MonoBehaviour
 	{
 		PEnMov = p;
 		TempoBonus = p.Tiempo;
-		Pj.SacarBolasa();
+		Pj.TakeOutBags();
 		//inicia el contador de tiempo para el bonus
 	}
 	
@@ -143,7 +139,7 @@ public class ControladorDeDescarga : MonoBehaviour
 		PEnMov = null;
 		Contador--;
 		
-		Pj.Dinero += (int)Bonus;
+		Pj.money += (int)Bonus;
 		
 		if(Contador <= 0)
 		{
@@ -182,14 +178,12 @@ public class ControladorDeDescarga : MonoBehaviour
 	
 	public void FinAnimSalida()
 	{
-		//avisa cuando termino la animacion para que prosiga el juego
+        //avisa cuando termino la animacion para que prosiga el juego
+
+        EscenaDescarga.gameObject.SetActive(false);
+
 		
-		for (int i = 0; i < Componentes.Length; i++)
-		{
-			Componentes[i].SetActiveRecursively(false);
-		}
-		
-		CamaraConduccion.SetActiveRecursively(true);
+		CamaraConduccion.gameObject.SetActive(true);
 		
 		CollCamion.enabled = true;
 		

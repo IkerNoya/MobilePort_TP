@@ -4,8 +4,7 @@ using System.Collections;
 public class Deposito2 : MonoBehaviour 
 {
 	
-	Player PjActual;
-	public string PlayerTag = "Player";
+	PlayerScript PjActual;
 	public bool Vacio = true;
 	public ControladorDeDescarga Contr1;
 	public ControladorDeDescarga Contr2;
@@ -36,7 +35,7 @@ public class Deposito2 : MonoBehaviour
 	
 	public void Soltar()
 	{
-		PjActual.VaciarInv();
+		PjActual.EmptyInventory();
 		PjActual.GetComponent<Frenado>().RestaurarVel();
 		PjActual.GetComponent<Respawn>().Respawnear(transform.position,transform.forward);
 		
@@ -52,9 +51,9 @@ public class Deposito2 : MonoBehaviour
 	
 	}
 	
-	public void Entrar(Player pj)
+	public void Entrar(PlayerScript pj)
 	{
-		if(pj.ConBolasas())
+		if(pj.HasBags())
 		{
 			
 			PjActual = pj;

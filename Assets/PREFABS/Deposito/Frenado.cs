@@ -61,7 +61,7 @@ public class Frenado : MonoBehaviour
 			{	
 				if(this.GetComponent<Player>().ConBolasas())
 				{
-					dep.Entrar(this.GetComponent<Player>());
+					dep.Entrar(this.GetComponent<PlayerScript>());
 					Destino = other.transform.position;
 					transform.forward = Destino - transform.position;
 					Frenar();
