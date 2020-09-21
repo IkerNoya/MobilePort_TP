@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +11,7 @@ public class GameManager_1 : MonoBehaviour
     }
 	[SerializeField] GameObject player1;
 	[SerializeField] GameObject player2;
+    public float timer = 30;
 
     public enum GameState
     {
@@ -29,18 +28,20 @@ public class GameManager_1 : MonoBehaviour
         
     }
 
-   
+   public float GetTimer()
+   {
+       return timer;
+   }
     void Update()
     {
-        
-    }
-	void CambiarACarrera()
-	{
-		state = GameManager_1.GameState.Game;
-	}
-    void CameraChange()
-    {
-        SceneManager.LoadScene("End");
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+        else
+        {
+            StartCoroutine(WaitTime());
+        }
     }
     void LoadScene(EndGame changescene)
     {
