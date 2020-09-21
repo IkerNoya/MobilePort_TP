@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
     }
     private void Update()
     {
-        movement = new Vector3(InputManager.Instance.GetAxis("Horizontal"), 0, InputManager.Instance.GetAxis("Vertical")) * speed * Time.deltaTime;
+        movement = new Vector3(InputManager.Instance.GetAxis("Horizontal_1"), 0, InputManager.Instance.GetAxis("Vertical_1")) * speed * Time.deltaTime;
         transform.position += movement;
     }
 }

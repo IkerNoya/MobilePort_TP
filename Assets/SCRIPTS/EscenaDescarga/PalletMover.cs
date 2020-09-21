@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class PalletMover : ManejoPallets {
 
-    public MoveType miInput;
-    public enum MoveType {
-        WASD,
-        Arrows
+    public PlayerSelect player;
+    public enum PlayerSelect {
+        player1,
+        player2
     }
 
     public ManejoPallets Desde, Hasta;
     bool segundoCompleto = false;
 
     private void Update() {
-        switch (miInput) {
-            case MoveType.WASD:
-                if (!Tenencia() && Desde.Tenencia() && Input.GetKeyDown(KeyCode.A)) {
+        switch (player) {
+            case PlayerSelect.player1:
+                if (!Tenencia() && Desde.Tenencia() && InputManager.Instance.GetAxis("Horizontal_1") < 0) {
                     PrimerPaso();
                 }
-                if (Tenencia() && Input.GetKeyDown(KeyCode.W)) {
+                if (Tenencia() && InputManager.Instance.GetAxis("Vertical_1") > 0) {
                     SegundoPaso();
                 }
-                if (segundoCompleto && Tenencia() && Input.GetKeyDown(KeyCode.D)) {
+                if (segundoCompleto && Tenencia() && InputManager.Instance.GetAxis("Horizontal_2") > 0) {
                     TercerPaso();
                 }
                 break;
-            case MoveType.Arrows:
-                if (!Tenencia() && Desde.Tenencia() && Input.GetKeyDown(KeyCode.LeftArrow)) {
+            case PlayerSelect.player2:
+                if (!Tenencia() && Desde.Tenencia() && InputManager.Instance.GetAxis("Horizontal_2")<0) {
                     PrimerPaso();
                 }
-                if (Tenencia() && Input.GetKeyDown(KeyCode.UpArrow)) {
+                if (Tenencia() && InputManager.Instance.GetAxis("Vertical_2") > 0) {
                     SegundoPaso();
                 }
-                if (segundoCompleto && Tenencia() && Input.GetKeyDown(KeyCode.RightArrow)) {
+                if (segundoCompleto && Tenencia() && InputManager.Instance.GetAxis("Horizontal_2") > 0) {
                     TercerPaso();
                 }
                 break;

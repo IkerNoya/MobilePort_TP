@@ -86,8 +86,6 @@ public class ControladorDeDescarga : MonoBehaviour
 		
 			
 		CollCamion.enabled = false;
-		Pj.CambiarADescarga();
-		
 		
 		GameObject go;
 		//asigna los pallets a las estanterias
@@ -186,8 +184,6 @@ public class ControladorDeDescarga : MonoBehaviour
 		CamaraConduccion.gameObject.SetActive(true);
 		
 		CollCamion.enabled = true;
-		
-		Pj.CambiarAConduccion();
 		
 		Dep.Soltar();
 		

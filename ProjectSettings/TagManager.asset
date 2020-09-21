@@ -13,6 +13,7 @@ TagManager:
   - Obstaculo
   - Player1_Cam
   - Player2_Cam
+  - Finishing Line
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Taxis
   - PlayerCam_1
   - PlayerCam_2
-  - 
+  - FinishLine
   - 
   - 
   - 

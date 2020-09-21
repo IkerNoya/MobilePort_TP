@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager_1 : MonoBehaviour
 {
@@ -18,9 +20,13 @@ public class GameManager_1 : MonoBehaviour
         Unload
     }
     public GameState state;
+    private void OnEnable()
+    {
+        EndGame.ChangeScene += LoadScene;
+    }
     void Start()
     {
-        PlayerScript.changeCams += CameraChange;
+        
     }
 
    
@@ -34,11 +40,21 @@ public class GameManager_1 : MonoBehaviour
 	}
     void CameraChange()
     {
-        Debug.Log("HIJO DE PUTA!");
+        SceneManager.LoadScene("End");
+    }
+    void LoadScene(EndGame changescene)
+    {
+        StartCoroutine(WaitTime());
     }
     private void OnDisable()
     {
-        PlayerScript.changeCams -= CameraChange;
+        EndGame.ChangeScene -= LoadScene;
+    }
+    IEnumerator WaitTime()
+    {
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene("End");
+        yield return null;
     }
 
 }
