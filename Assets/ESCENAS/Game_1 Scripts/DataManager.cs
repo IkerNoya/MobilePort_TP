@@ -13,8 +13,6 @@ public class DataManager : MonoBehaviour
     }
     void OnEnable()
     {
-        EndGame.AddScore1 += addScore1;
-        EndGame.AddScore2 += addScore2;
         UIMenu.resetPoints += ResetScore;
     }
     void Awake()
@@ -34,8 +32,6 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Player1" + player1Score);
-        Debug.Log("Player2" + player2Score);
     }
     void addScore1(EndGame addscore1)
     {
@@ -52,8 +48,6 @@ public class DataManager : MonoBehaviour
     }
     void OnDisable()
     {
-        EndGame.AddScore1 -= addScore1;
-        EndGame.AddScore2 -= addScore2;
         UIMenu.resetPoints -= ResetScore;
     }
 }

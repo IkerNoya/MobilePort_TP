@@ -7,7 +7,7 @@ public class Bolsa : MonoBehaviour
 	//public int IdPlayer = 0;
 	public string TagPlayer = "";
 	public Texture2D ImagenInventario;
-	Player Pj = null;
+	PlayerScript Pj = null;
 	
 	bool Desapareciendo;
 	public GameObject Particulas;
@@ -17,7 +17,6 @@ public class Bolsa : MonoBehaviour
 	void Start () 
 	{
 		Monto = Pallet.Valores.Valor2;
-		
 		
 		if(Particulas != null)
 			Particulas.SetActive(false);
@@ -45,9 +44,9 @@ public class Bolsa : MonoBehaviour
 	
 	void OnTriggerEnter(Collider coll)
 	{
-		if(coll.tag == TagPlayer)
+		if(coll.gameObject.CompareTag("Player"))
 		{
-			Pj = coll.GetComponent<Player>();
+			Pj = coll.GetComponent<PlayerScript>();
 			//if(IdPlayer == Pj.IdPlayer)
 			//{
 				if(Pj.AgregarBolsa(this))

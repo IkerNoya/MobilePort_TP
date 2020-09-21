@@ -7,7 +7,7 @@ public class ControladorDeDescarga : MonoBehaviour
 	
 	int Contador = 0;
 	
-	Deposito2 Dep;
+	public Deposito2 Dep;
 	
 	public GameObject EscenaDescarga;//todos los componentes que debe activar en esta escena
 	
@@ -176,7 +176,9 @@ public class ControladorDeDescarga : MonoBehaviour
 	
 	public void FinAnimSalida()
 	{
-        //avisa cuando termino la animacion para que prosiga el juego
+		//avisa cuando termino la animacion para que prosiga el juego
+		if(Dep!=null)
+			Dep.Soltar();
 
         EscenaDescarga.gameObject.SetActive(false);
 
@@ -185,7 +187,6 @@ public class ControladorDeDescarga : MonoBehaviour
 		
 		CollCamion.enabled = true;
 		
-		Dep.Soltar();
 		
 	}
 	

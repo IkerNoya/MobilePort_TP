@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
             if (Bags[i] != null)
             {
                 Bags[i] = null;
+                currentBags--;
                 return;
             }
         }
@@ -84,4 +85,16 @@ public class PlayerScript : MonoBehaviour
     {
         return cd;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (HasBags())
+        {
+            if (other.gameObject.CompareTag("Deposito"))
+            {
+                Deposito2 dep = GetComponent<Deposito2>();
+                cd.Activar(dep);
+            }
+        }
+    }
+  
 }
