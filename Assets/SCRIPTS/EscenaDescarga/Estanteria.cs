@@ -2,10 +2,14 @@ using UnityEngine;
 using System.Collections;
 
 public class Estanteria : ManejoPallets
-{	
+{
 	public Cinta CintaReceptora;//cinta que debe recibir la bolsa
 	public Pallet.Valores Valor;
-	PilaPalletMng Contenido;
+	PilaPalletMng _Contenido;
+	PilaPalletMng Contenido
+	{
+		get { if (_Contenido == null) _Contenido = GetComponent<PilaPalletMng>(); return _Contenido; }
+	}
 	public bool Anim = false;
 	
 	
@@ -19,9 +23,8 @@ public class Estanteria : ManejoPallets
 	
 	//--------------------------------//	
 	
-	void Start () 
+	void Awake () 
 	{
-		Contenido = GetComponent<PilaPalletMng>();
 		ColorOrigModel = ModelSuelo.GetComponent<Renderer>().material.color;
 	}
 	

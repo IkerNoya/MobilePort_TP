@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class PlayerScript : MonoBehaviour
     int currentBags = 0;
     public ControladorDeDescarga cd;
     public int IdPlayer = 0;
-
+    public static event Action<PlayerScript> AddMoney1;
+    public static event Action<PlayerScript> AddMoney2;
     public enum State
     {
         Driving, Delivering
@@ -26,11 +28,6 @@ public class PlayerScript : MonoBehaviour
             Bags[i] = null;
     }
 
-    void Update()
-    {
-        
-    }
-
     public bool AgregarBolsa(Bolsa bag)
     {
         if (currentBags + 1 <= Bags.Length)
@@ -38,6 +35,10 @@ public class PlayerScript : MonoBehaviour
             Bags[currentBags] = bag;
             currentBags++;
             money += (int)bag.Monto;
+            if(player == playerSelect.player1)
+                AddMoney1(this);
+            if (player == playerSelect.player2)
+                AddMoney2(this);
             bag.Desaparecer();
             return true;
         }

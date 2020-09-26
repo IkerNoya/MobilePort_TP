@@ -5,8 +5,9 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     private static DataManager instance;
-    public float player1Score;
-    public float player2Score;
+    public float player1money;
+    public float player2money;
+    int moneyGain = 250000;
     public static DataManager Get()
     {
         return instance;
@@ -14,6 +15,8 @@ public class DataManager : MonoBehaviour
     void OnEnable()
     {
         UIMenu.resetPoints += ResetScore;
+        PlayerScript.AddMoney1 += AddScore1;
+        PlayerScript.AddMoney2 += AddScore2;
     }
     void Awake()
     {
@@ -32,22 +35,26 @@ public class DataManager : MonoBehaviour
 
     void Update()
     {
+
     }
-    void addScore1(EndGame addscore1)
+    void AddScore1(PlayerScript addmoney)
     {
-        player1Score++;
+        player1money += moneyGain;
     }
-    void addScore2(EndGame addscore2)
+    void AddScore2(PlayerScript addmoney)
     {
-        player2Score++;
+        player1money += moneyGain;
     }
+
     void ResetScore(UIMenu reset)
     {
-        player1Score = 0;
-        player2Score = 0;
+        player1money = 0;
+        player2money = 0;
     }
     void OnDisable()
     {
         UIMenu.resetPoints -= ResetScore;
+        PlayerScript.AddMoney1 -= AddScore1;
+        PlayerScript.AddMoney2 -= AddScore2;
     }
 }

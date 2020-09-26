@@ -22,7 +22,7 @@ public class PalletMover : ManejoPallets {
                 if (Tenencia() && InputManager.Instance.GetAxis("Vertical_1") > 0) {
                     SegundoPaso();
                 }
-                if (segundoCompleto && Tenencia() && InputManager.Instance.GetAxis("Horizontal_2") > 0) {
+                if (segundoCompleto && Tenencia() && InputManager.Instance.GetAxis("Horizontal_1") > 0) {
                     TercerPaso();
                 }
                 break;

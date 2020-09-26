@@ -11,7 +11,7 @@ public class GameManager_1 : MonoBehaviour
     }
 	[SerializeField] GameObject player1;
 	[SerializeField] GameObject player2;
-    public float timer = 30;
+    public float timer = 90;
 
     public enum GameState
     {
