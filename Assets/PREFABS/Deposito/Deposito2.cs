@@ -53,6 +53,7 @@ public class Deposito2 : MonoBehaviour
 	
 	public void Entrar(PlayerScript pj)
 	{
+		Debug.Log("ME QUIERO MORIR");
 		if(pj.HasBags())
 		{
 			

@@ -50,7 +50,6 @@ public class UIMenu : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
-        Debug.Log("Loading " + sceneName);
         if (sceneName == "Game_1")
         {
             resetPoints(this);

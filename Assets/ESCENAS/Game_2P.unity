@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6ecd556b06c155649bce3d9977abbb82, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.03675117, g: 0.035407346, b: 0.036655117, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controlador: {fileID: 650625026}
   CintaReceptora: {fileID: 1293061144}
-  Valor: 250000
+  Valor: 100000
   Anim: 0
   Intervalo: 0.4
   Permanencia: 0.1
@@ -24362,6 +24362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe57ced8d4103a46b540fcb275410a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1030499395 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6071215691716991052, guid: 4187f3d660a346f44a2186d2445145f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1901372583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1030499397 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 6093628538466224636, guid: 4187f3d660a346f44a2186d2445145f2,
@@ -35917,11 +35923,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285b23ddcb21a6f44949d0f3ba936b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1546271555956403694}
-  player2: {fileID: 1030499392}
-  offset: {x: 0, y: 6.69, z: -7.72}
-  followSpeed: 3
-  player: 0
+  target: {fileID: 1546271555956403696}
+  height: 5.21
+  positionDamping: 8.44
+  velocityDamping: 3
+  distance: 8.97
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  LejaniaZ: -1.6
 --- !u!1 &1340581648
 GameObject:
   m_ObjectHideFlags: 0
@@ -40435,6 +40445,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 213341552}
+  Joystick1: {fileID: 2129308871}
+  Joystick2: {fileID: 1544289882}
   timerText: {fileID: 1320719890}
 --- !u!1 &1402260091
 GameObject:
@@ -43234,6 +43246,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544087867}
   m_Mesh: {fileID: 4300012, guid: 0ac3464ae5d3b4445b6a8c68a0da9197, type: 3}
+--- !u!1 &1544289882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1319262969552691110, guid: 52b63fa0267fb074d9de8eaef3bc37db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1594106446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1549260299
 GameObject:
   m_ObjectHideFlags: 0
@@ -56756,11 +56774,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285b23ddcb21a6f44949d0f3ba936b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 1546271555956403694}
-  player2: {fileID: 1030499392}
-  offset: {x: 0, y: 6.69, z: -7.72}
-  followSpeed: 3
-  player: 1
+  target: {fileID: 1030499395}
+  height: 5.21
+  positionDamping: 8.44
+  velocityDamping: 3
+  distance: 8.97
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  LejaniaZ: -1.6
 --- !u!81 &2052860526
 AudioListener:
   m_ObjectHideFlags: 0
@@ -58342,6 +58364,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127540944}
   m_Mesh: {fileID: 4300406, guid: 0ac3464ae5d3b4445b6a8c68a0da9197, type: 3}
+--- !u!1 &2129308871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1319262969552691110, guid: 52b63fa0267fb074d9de8eaef3bc37db,
+    type: 3}
+  m_PrefabInstance: {fileID: 375164807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141348517
 GameObject:
   m_ObjectHideFlags: 0
@@ -58437,6 +58465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe57ced8d4103a46b540fcb275410a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1546271555956403696 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6071215691716991052, guid: 4187f3d660a346f44a2186d2445145f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4692887163917878086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &1546271555956403698 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 6093628538466224636, guid: 4187f3d660a346f44a2186d2445145f2,

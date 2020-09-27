@@ -1,15 +1,14 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class ManejoPallets : MonoBehaviour 
 {
-	protected System.Collections.Generic.List<Pallet> Pallets = new System.Collections.Generic.List<Pallet>();
+	protected List<Pallet> Pallets = new List<Pallet>();
 	public ControladorDeDescarga Controlador;
 	protected int Contador = 0;
 	
 	public virtual bool Recibir(Pallet pallet)
 	{
-		Debug.Log(gameObject.name+" / Recibir()");
 		Pallets.Add(pallet);
 		pallet.Pasaje();
 		return true;

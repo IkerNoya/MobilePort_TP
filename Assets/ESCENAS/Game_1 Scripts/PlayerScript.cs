@@ -94,6 +94,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Deposito2 dep = GetComponent<Deposito2>();
                 cd.Activar(dep);
+
             }
         }
     }
